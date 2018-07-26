@@ -1,1 +1,1 @@
-include ':sample', ':androidmessagequeue'
+include ':sample', ':SingleTaskExecutor'
