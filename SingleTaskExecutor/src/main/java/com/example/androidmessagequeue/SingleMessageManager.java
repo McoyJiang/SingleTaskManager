@@ -15,6 +15,13 @@ import java.util.Arrays;
 
 import static com.example.androidmessagequeue.utils.Config.SHOW_LOGS;
 
+/**
+ * @author Danny.姜
+ *
+ * 单任务管理类，负责启动一个新的Task(如果有必要会将正在进行的Task做停止清空操作)
+ * 一个Task的流程是从create -> release,具体如下：
+ * Create -> Prepare -> Start -> Stop -> Reset -> Release
+ */
 public class SingleMessageManager implements MessageProcessCallback{
 
     private static final String TAG = SingleMessageManager.class.getSimpleName();
@@ -29,6 +36,13 @@ public class SingleMessageManager implements MessageProcessCallback{
     private MessageState mCurrentState = MessageState.IDLE;
 
     private static SingleMessageManager instance;
+
+    /**
+     * 在外部必须通过getInstance方法才能获取SingleMessageManager的实例对象
+     */
+    private SingleMessageManager() {
+        // 对外部隐藏此构造器，防止在其他Class中调用
+    }
 
     public static SingleMessageManager getInstance() {
         if (instance == null) {
